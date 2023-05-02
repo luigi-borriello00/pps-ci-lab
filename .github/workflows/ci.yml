@@ -4,6 +4,7 @@ name: Example workflow
 on:
   push:
     branches:
+      - '*'
     tags: '*'
     paths-ignore: # Pushes that change only these file won't start the workflow
       - 'README.md'
