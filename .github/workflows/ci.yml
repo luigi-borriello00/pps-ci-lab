@@ -1,0 +1,35 @@
+name: Example workflow
+
+# Controls when the workflow will run
+on:
+  push:
+    tags: '*'
+    paths-ignore: # Pushes that change only these file won't start the workflow
+      - 'README.md'
+      - 'CHANGELOG.md'
+      - 'LICENSE'
+  pull_request:
+    branches: # Only pull requests based on these branches will start the workflow
+      - master
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  Default-Example:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 11
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - name: Execute Gradle build
+        run: ./gradlew build
