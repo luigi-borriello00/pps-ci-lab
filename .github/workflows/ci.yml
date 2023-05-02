@@ -3,6 +3,7 @@ name: Example workflow
 # Controls when the workflow will run
 on:
   push:
+    branch:
     tags: '*'
     paths-ignore: # Pushes that change only these file won't start the workflow
       - 'README.md'
